@@ -1,9 +1,7 @@
 import React from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Link, Route } from "react-router-dom";
 import "./App.css";
 import Home from "./pages/home/Home";
-
-import Register from "./pages/register/Register";
 
 export const AuthContext = React.createContext();
 
@@ -62,8 +60,9 @@ function App() {
       >
         {/* <div className="App">{!state.isAuthenticated ? <Login/> : <Home/>}</div> */}
         <Switch>
+          <Link href="https://quarkend.github.io/chatz/"></Link>
           <Route exact path="/">
-            {state.isAuthenticated ? <Home /> : <Register />}
+            <Home />
           </Route>
         </Switch>
       </AuthContext.Provider>
