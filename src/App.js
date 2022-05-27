@@ -1,25 +1,73 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import "./App.css";
+import Home from "./pages/home/Home";
 
+import Register from "./pages/register/Register";
+
+export const AuthContext = React.createContext();
+
+const initialState = {
+  isAuthenticated: false,
+  isAdmin: false,
+  user: JSON.parse(localStorage.getItem("user")) || null,
+  // admin: JSON.parse(localStorage.getItem("admin")) || null,
+  token: null,
+};
+const reducer = (state, action) => {
+  switch (action.type) {
+    case "LOGIN":
+      localStorage.setItem("user", JSON.stringify(action.payload.user));
+      localStorage.setItem("token", JSON.stringify(action.payload.token));
+      return {
+        ...state,
+        isAdmin: true,
+        isAuthenticated: true,
+        user: action.payload.user,
+        token: action.payload.token,
+      };
+    case "X":
+      localStorage.clear();
+      return {
+        ...state,
+        isAuthenticated: false,
+        user: null,
+      };
+    default:
+      return state;
+  }
+};
 function App() {
+  const [state, dispatch] = React.useReducer(reducer, initialState);
+  React.useEffect(() => {
+    const user = JSON.parse(localStorage.getItem("user") || null);
+    const token = JSON.parse(localStorage.getItem("token") || null);
+    if (user && token) {
+      dispatch({
+        type: "LOGIN",
+        payload: {
+          user,
+          token,
+        },
+      });
+    }
+  }, []);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <AuthContext.Provider
+        value={{
+          state,
+          dispatch,
+        }}
+      >
+        {/* <div className="App">{!state.isAuthenticated ? <Login/> : <Home/>}</div> */}
+        <Switch>
+          <Route exact path="/">
+            {state.isAuthenticated ? <Home /> : <Register />}
+          </Route>
+        </Switch>
+      </AuthContext.Provider>
+    </Router>
   );
 }
-
 export default App;
