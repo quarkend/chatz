@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/chatz/static/css/main.073c9b0a.css",
+    "main.js": "/chatz/static/js/main.ff789451.js",
+    "static/js/787.f36e3b5e.chunk.js": "/chatz/static/js/787.f36e3b5e.chunk.js",
+    "index.html": "/chatz/index.html",
+    "main.073c9b0a.css.map": "/chatz/static/css/main.073c9b0a.css.map",
+    "main.ff789451.js.map": "/chatz/static/js/main.ff789451.js.map",
+    "787.f36e3b5e.chunk.js.map": "/chatz/static/js/787.f36e3b5e.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.073c9b0a.css",
+    "static/js/main.ff789451.js"
+  ]
+}
