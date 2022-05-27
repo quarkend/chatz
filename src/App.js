@@ -60,7 +60,7 @@ function App() {
       >
         {/* <div className="App">{!state.isAuthenticated ? <Login/> : <Home/>}</div> */}
         <Switch>
-          <Link href="https://quarkend.github.io/chatz/"></Link>
+          <Link href="https://quarkend.github.io/chatz/">chatz</Link>
           <Route exact path="/">
             <Home />
           </Route>
